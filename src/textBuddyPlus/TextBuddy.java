@@ -61,6 +61,9 @@ public class TextBuddy {
 	// Task List (Starting from 1) and index stored in the LinkedList (Starting
 	// from 0)
 	private static final int INDEX_SHIFT_FIX = 1;
+	
+	// This constant indicates that an list is empty.
+	private static final int EMPTY_LIST_SIZE = 0;
 
 	// This is used to store the given file name
 	private static String fileName = null;
@@ -173,8 +176,11 @@ public class TextBuddy {
 	}
 	
 	private static String searchTask(String userCommand) {
-		
-		return MESSAGE_SEARCH_NOT_FOUND;
+		if (tasks.size() == EMPTY_LIST_SIZE) {
+			return MESSAGE_SEARCH_NOT_FOUND;
+		}
+		String keyword = removeFirstWord(userCommand);
+		return buildResultList(tasks, keyword);
 	}
 
 	/*
@@ -281,6 +287,35 @@ public class TextBuddy {
 			}
 		}
 		return taskList.toString();
+	}
+	
+	/**
+	 * This method prepares the search result list for print on the screen 
+	 * 
+	 * @param keyword the keyword for searching
+	 * 
+	 * @return a nice-formatted result list String
+	 */
+	private static String buildResultList(LinkedList<String> tasks, String keyword) {
+		StringBuilder taskList = new StringBuilder();
+		boolean isFound = false;
+		for (int i = 0; i < tasks.size(); i++) {
+			String task = tasks.get(i);
+			if (task.contains(keyword)) {
+				isFound = true; // keyword matches a task
+				int indexForDisplay = i + INDEX_SHIFT_FIX;
+				taskList.append(indexForDisplay);
+				taskList.append(". ");
+				taskList.append(task);
+				taskList.append("\n");
+			}
+		}
+
+		if (isFound) {
+			return taskList.toString();
+		} else {
+			return MESSAGE_SEARCH_NOT_FOUND;
+		}
 	}
 
 	/**
