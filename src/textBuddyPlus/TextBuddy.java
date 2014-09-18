@@ -155,6 +155,8 @@ public class TextBuddy {
 			return displayTask();
 		} else if (commandType.equalsIgnoreCase("clear")) {
 			return clearTask();
+		} else if (commandType.equalsIgnoreCase("sort")) {
+			return sortTask();
 		} else if (commandType.equalsIgnoreCase("exit")) {
 			exitTextBuddy();
 			System.exit(0);
@@ -162,6 +164,14 @@ public class TextBuddy {
 		} else {
 			return ERROR_INVALID_COMMAND;
 		}
+	}
+	
+	/*
+	 * Sort tasks alphabetically
+	 */
+	private static String sortTask() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -315,8 +325,15 @@ public class TextBuddy {
 	 * (For testing purpose)
 	 */
 	public static int getLineCount() {
-		loadTasks();
-		return tasks.size();	
+		int lines = 0;
+		try {
+			BufferedReader countReader = new BufferedReader(new FileReader(fileName));
+			while (countReader.readLine() != null) lines++;
+			countReader.close();
+		} catch (Exception e) {
+			throw new Error(ERROR_IO);
+		}
+		return lines;
 	}
 
 	/**
