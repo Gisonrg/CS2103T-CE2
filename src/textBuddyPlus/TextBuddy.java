@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -170,17 +171,23 @@ public class TextBuddy {
 	
 	/*
 	 * Sort tasks alphabetically
+	 * 'alphabetically' means uppercase and lowercase don't affect sort results.
+	 * For example, 'apple' should be in front of 'Book', even though 'B' has a 
+	 * bigger ASCii value than 'a' 
 	 */
 	private static String sortTask() {
-		System.out.println("Before");
-		for (int i=0;i<tasks.size();i++){
-			System.out.println(tasks.get(i));
+		
+		class SortComparator implements Comparator<String> {
+			@Override
+			public int compare(String task1, String task2) {
+				String task1FirstChar = task1.substring(0, 1);
+				String task2FirstChar = task2.substring(0, 1);
+				
+				return task1FirstChar.compareToIgnoreCase(task2FirstChar);
+			}
 		}
-		Collections.sort(tasks);
-		System.out.println("After");
-		for (int i=0;i<tasks.size();i++){
-			System.out.println(tasks.get(i));
-		}
+		
+		Collections.sort(tasks, new SortComparator());
 		
 		// save changes to the file
 		writeChanges();
