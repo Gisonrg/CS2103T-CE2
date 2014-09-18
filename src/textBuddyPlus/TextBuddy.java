@@ -49,6 +49,7 @@ public class TextBuddy {
 	private static final String MESSAGE_CLEAR = "All content deleted from %1$s.";
 	private static final String MESSAGE_EMPTY = "There is no item in %1$s now.";
 	private static final String MESSAGE_SORT = "Tasks sorted.";
+	private static final String MESSAGE_SEARCH_NOT_FOUND = "No result found.";
 
 	// Error Constant
 	private static final String ERROR_INVALID_COMMAND = "The command you entered is invalid!";
@@ -160,6 +161,8 @@ public class TextBuddy {
 			return clearTask();
 		} else if (commandType.equalsIgnoreCase("sort")) {
 			return sortTask();
+		} else if (commandType.equalsIgnoreCase("search")) {
+			return searchTask(userCommand);
 		} else if (commandType.equalsIgnoreCase("exit")) {
 			exitTextBuddy();
 			System.exit(0);
@@ -169,6 +172,11 @@ public class TextBuddy {
 		}
 	}
 	
+	private static String searchTask(String userCommand) {
+		
+		return MESSAGE_SEARCH_NOT_FOUND;
+	}
+
 	/*
 	 * Sort tasks alphabetically
 	 * 'alphabetically' means uppercase and lowercase don't affect sort results.
