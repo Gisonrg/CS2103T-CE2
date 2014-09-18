@@ -175,6 +175,7 @@ public class TextBuddy {
 		}
 	}
 	
+	
 	private static String searchTask(String userCommand) {
 		if (tasks.size() == EMPTY_LIST_SIZE) {
 			return MESSAGE_SEARCH_NOT_FOUND;
@@ -184,7 +185,7 @@ public class TextBuddy {
 	}
 
 	/*
-	 * Sort tasks alphabetically
+	 * This method sort tasks alphabetically
 	 * 'alphabetically' means uppercase and lowercase don't affect sort results.
 	 * For example, 'apple' should be in front of 'Book', even though 'B' has a 
 	 * bigger ASCii value than 'a' 
@@ -301,7 +302,7 @@ public class TextBuddy {
 		boolean isFound = false;
 		for (int i = 0; i < tasks.size(); i++) {
 			String task = tasks.get(i);
-			if (task.contains(keyword)) {
+			if (task.toLowerCase().contains(keyword.toLowerCase())) { // Ignore Character Case
 				isFound = true; // keyword matches a task
 				int indexForDisplay = i + INDEX_SHIFT_FIX;
 				taskList.append(indexForDisplay);
@@ -319,7 +320,7 @@ public class TextBuddy {
 	}
 
 	/**
-	 * This class clear all the task from the file
+	 * This method clear all the task from the file
 	 * 
 	 * @return a feedback message indicating if the operation is successful.
 	 */
