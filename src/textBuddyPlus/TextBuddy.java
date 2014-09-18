@@ -89,7 +89,7 @@ public class TextBuddy {
 	 * 
 	 * @param args the arguments input from the terminal
 	 */
-	private static void initializeTextBuddy(String[] args) {
+	public static void initializeTextBuddy(String[] args) {
 //		String inputFile = args[0];
 		String inputFile = "input.txt";
 		fileName = inputFile;
@@ -129,7 +129,7 @@ public class TextBuddy {
 		String input = null;
 		try {
 			while ((input = reader.readLine()) != null) {
-				tasks.add(input);
+				tasks.add(input.trim());
 			}
 		} catch (IOException e) {
 			throw new Error(ERROR_IO);
