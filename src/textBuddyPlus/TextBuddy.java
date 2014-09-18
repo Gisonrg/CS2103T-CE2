@@ -60,10 +60,12 @@ public class TextBuddy {
 
 	// This is used to store the given file name
 	private static String fileName = null;
+	
 	// These two Reader and Writer are used to access and manipulate the given
 	// text file
 	private static BufferedReader reader;
 	private static BufferedWriter writer;
+	
 	// This is used to read in user input command
 	private static Scanner scanner = new Scanner(System.in);
 
@@ -88,7 +90,8 @@ public class TextBuddy {
 	 * @param args the arguments input from the terminal
 	 */
 	private static void initializeTextBuddy(String[] args) {
-		String inputFile = args[0];
+//		String inputFile = args[0];
+		String inputFile = "gogogo.txt";
 		fileName = inputFile;
 		initializeFileOperator(fileName);
 		loadTasks();
@@ -140,7 +143,7 @@ public class TextBuddy {
 	 * @param userCommand user's input command
 	 * @return a feedback message
 	 */
-	private static String executeCommand(String userCommand) {
+	public static String executeCommand(String userCommand) {
 		// decide the command category based on the first word of user input.
 		String commandType = getFirstWord(userCommand);
 
@@ -270,8 +273,7 @@ public class TextBuddy {
 	}
 
 	/**
-	 * This method use the BufferWriter to write a new task to 
-	 * the file in a new line.
+	 * This method writes a new task to the file in a new line.
 	 * 
 	 * @param task the task to be wrote
 	 */
@@ -286,8 +288,7 @@ public class TextBuddy {
 	}
 	
 	/**
-	 * This method write changes to the file by rewriting all the existing tasks
-	 * into the file.
+	 * This method write changes to the file
 	 */
 	private static void writeChanges() {
 		clearFiles();
@@ -298,8 +299,7 @@ public class TextBuddy {
 	}
 	
 	/**
-	 * This method will clear the file's content by rewriting the file from
-	 * the beginning
+	 * This method will clear the file's content
 	 */
 	private static void clearFiles() {
 		try {
