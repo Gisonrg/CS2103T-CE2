@@ -75,6 +75,15 @@ public class TextBuddyTest {
 		TextBuddy.executeCommand("clear");
 		output = TextBuddy.executeCommand("search no such word");
 		assertEquals("No result found.", output);
+		
+		TextBuddy.executeCommand("clear");
+		TextBuddy.executeCommand("add a");
+		TextBuddy.executeCommand("add b");
+		TextBuddy.executeCommand("add c");
+		TextBuddy.executeCommand("add d");
+		TextBuddy.executeCommand("add e");
+		output = TextBuddy.executeCommand("search c");
+		assertEquals("3. c", output);
 	}
 
 }
