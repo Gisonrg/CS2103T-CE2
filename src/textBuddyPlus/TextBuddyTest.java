@@ -83,7 +83,7 @@ public class TextBuddyTest {
 		TextBuddy.executeCommand("add d");
 		TextBuddy.executeCommand("add e");
 		output = TextBuddy.executeCommand("search c");
-		assertEquals("3. c", output);
+		assertEquals("3. c\n", output);
 	}
 
 }
