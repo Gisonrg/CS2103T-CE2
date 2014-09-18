@@ -84,6 +84,16 @@ public class TextBuddyTest {
 		TextBuddy.executeCommand("add e");
 		output = TextBuddy.executeCommand("search c");
 		assertEquals("3. c\n", output);
+		
+		// search ignoring charter case
+		TextBuddy.executeCommand("clear");
+		TextBuddy.executeCommand("add applE");
+		TextBuddy.executeCommand("add bOOk");
+		TextBuddy.executeCommand("add sleep");
+		TextBuddy.executeCommand("add dog");
+		TextBuddy.executeCommand("add eAting");
+		output = TextBuddy.executeCommand("search a");
+		assertEquals("1. applE\n5. eAting\n", output);
 	}
 
 }
