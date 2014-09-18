@@ -91,7 +91,7 @@ public class TextBuddy {
 	 */
 	private static void initializeTextBuddy(String[] args) {
 //		String inputFile = args[0];
-		String inputFile = "gogogo.txt";
+		String inputFile = "input.txt";
 		fileName = inputFile;
 		initializeFileOperator(fileName);
 		loadTasks();
@@ -309,6 +309,15 @@ public class TextBuddy {
 			throw new Error(ERROR_IO);
 		}
 	}
+	
+	/**
+	 * This method checks how many lines are in the input file
+	 * (For testing purpose)
+	 */
+	public static int getLineCount() {
+		loadTasks();
+		return tasks.size();	
+	}
 
 	/**
 	 * This method checks if a task index is valid
@@ -349,5 +358,6 @@ public class TextBuddy {
 	private static void showToUser(String text) {
 		System.out.println(text);
 	}
+	
 }
 
