@@ -50,6 +50,13 @@ public class TextBuddyTest {
 		output = TextBuddy.executeCommand("display");
 		assertEquals("1. Ahead G\n2. Girl D\n3. Water Z", output);
 		
-
+		TextBuddy.executeCommand("clear");
+		TextBuddy.executeCommand("add C");
+		TextBuddy.executeCommand("add b");
+		TextBuddy.executeCommand("add A");
+		TextBuddy.executeCommand("sort");
+		output = TextBuddy.executeCommand("display");
+		assertEquals("1. A\n2. b\n3. C", output);
+		
 	}
 }
