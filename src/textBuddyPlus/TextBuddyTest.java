@@ -11,7 +11,7 @@ public class TextBuddyTest {
 	public static void setUpBeforeClass() throws Exception {
 		// set up TextBuddy
 //		TextBuddy.main(null);
-		TextBuddy.main(null);
+		TextBuddy.initializeTextBuddy(null);
 		
 	}
 	
