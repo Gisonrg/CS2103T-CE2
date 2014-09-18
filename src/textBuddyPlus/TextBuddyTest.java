@@ -29,4 +29,16 @@ public class TextBuddyTest {
 		TextBuddy.executeCommand("clear");
 		assertEquals(0, TextBuddy.getLineCount());
 	}
+	
+	@Test
+	public void testSort() {
+		TextBuddy.executeCommand("clear");
+		
+		TextBuddy.executeCommand("add c");
+		TextBuddy.executeCommand("add b");
+		TextBuddy.executeCommand("add a");
+		String output = TextBuddy.executeCommand("display");
+		assertEquals("1. a\n2. b\n3. c", output);
+		
+	}
 }
