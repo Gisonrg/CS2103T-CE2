@@ -66,6 +66,15 @@ public class TextBuddyTest {
 		TextBuddy.executeCommand("sort");
 		output = TextBuddy.executeCommand("display");
 		assertEquals("1. A\n2. b\n3. C", output);
-		
 	}
+	
+	@Test
+	public void testSearchTask() {
+		String output = null;
+		// Test null case
+		TextBuddy.executeCommand("clear");
+		output = TextBuddy.executeCommand("search no such word");
+		assertEquals("No result found.", output);
+	}
+
 }
