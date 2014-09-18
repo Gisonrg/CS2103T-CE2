@@ -33,8 +33,17 @@ public class TextBuddyTest {
 	@Test
 	public void testSort() {
 		String output = null;
-		TextBuddy.executeCommand("clear");
 		
+		// Test null case
+		TextBuddy.executeCommand("clear");
+		TextBuddy.executeCommand("add ");
+		TextBuddy.executeCommand("add ");
+		TextBuddy.executeCommand("add ");
+		TextBuddy.executeCommand("sort");
+		output = TextBuddy.executeCommand("display");
+		assertEquals("There is no item in input.txt now.", output);
+		
+		TextBuddy.executeCommand("clear");
 		TextBuddy.executeCommand("add c");
 		TextBuddy.executeCommand("add b");
 		TextBuddy.executeCommand("add a");
