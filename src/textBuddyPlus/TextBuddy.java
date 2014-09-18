@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -46,6 +47,7 @@ public class TextBuddy {
 	private static final String MESSAGE_DELETED = "Deleted from %1$s: \"%2$s\".";
 	private static final String MESSAGE_CLEAR = "All content deleted from %1$s.";
 	private static final String MESSAGE_EMPTY = "There is no item in %1$s now.";
+	private static final String MESSAGE_SORT = "Tasks sorted.";
 
 	// Error Constant
 	private static final String ERROR_INVALID_COMMAND = "The command you entered is invalid!";
@@ -170,8 +172,19 @@ public class TextBuddy {
 	 * Sort tasks alphabetically
 	 */
 	private static String sortTask() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Before");
+		for (int i=0;i<tasks.size();i++){
+			System.out.println(tasks.get(i));
+		}
+		Collections.sort(tasks);
+		System.out.println("After");
+		for (int i=0;i<tasks.size();i++){
+			System.out.println(tasks.get(i));
+		}
+		
+		// save changes to the file
+		writeChanges();
+		return MESSAGE_SORT;
 	}
 
 	/**
