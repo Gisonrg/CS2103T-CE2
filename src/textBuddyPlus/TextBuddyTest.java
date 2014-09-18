@@ -32,13 +32,24 @@ public class TextBuddyTest {
 	
 	@Test
 	public void testSort() {
+		String output = null;
 		TextBuddy.executeCommand("clear");
 		
 		TextBuddy.executeCommand("add c");
 		TextBuddy.executeCommand("add b");
 		TextBuddy.executeCommand("add a");
-		String output = TextBuddy.executeCommand("display");
+		TextBuddy.executeCommand("sort");
+		output = TextBuddy.executeCommand("display");
 		assertEquals("1. a\n2. b\n3. c", output);
 		
+		TextBuddy.executeCommand("clear");
+		TextBuddy.executeCommand("add Water Z");
+		TextBuddy.executeCommand("add Ahead G");
+		TextBuddy.executeCommand("add Girl D");
+		TextBuddy.executeCommand("sort");
+		output = TextBuddy.executeCommand("display");
+		assertEquals("1. Ahead G\n2. Girl D\n3. Water Z", output);
+		
+
 	}
 }
