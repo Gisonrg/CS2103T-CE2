@@ -80,6 +80,15 @@ public class TextBuddyTest {
 		TextBuddy.executeCommand("add eAting");
 		output = TextBuddy.executeCommand("search a");
 		assertEquals("1. applE\n5. eAting\n", output);
+		
+		TextBuddy.executeCommand("clear");
+		TextBuddy.executeCommand("add jiang sheng");
+		TextBuddy.executeCommand("add study happily");
+		TextBuddy.executeCommand("add NUS");
+		TextBuddy.executeCommand("add school of computing");
+		TextBuddy.executeCommand("add computer science");
+		output = TextBuddy.executeCommand("search comp");
+		assertEquals("4. school of computing\n5. computer science\n", output);
 	}
 
 }
