@@ -1,5 +1,3 @@
-package textBuddyPlus;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,6 +25,12 @@ import java.util.Scanner;
  * command) delete -1 / delete aaa (invalid command, the index is invalid)
  * 
  * Display Text Command input: display
+ * 
+ * Sort Text Command input: sort
+ * Sorting will ignore upper and lower case
+ * 
+ * Search Text Command input: search keyword
+ * Searching will ignore upper and lower case.
  * 
  * Clear Text Command input: clear
  * 
@@ -260,7 +264,7 @@ public class TextBuddy {
 	 * @return a feedback string indicating the status of the operation
 	 */
 	private static String sortTask() {
-		
+		// and inner class to be used as comparator in sort 
 		class SortComparator implements Comparator<String> {
 			@Override
 			public int compare(String task1, String task2) {

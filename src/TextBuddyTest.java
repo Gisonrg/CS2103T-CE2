@@ -1,5 +1,3 @@
-package textBuddyPlus;
-
 import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
@@ -56,6 +54,7 @@ public class TextBuddyTest {
 	
 	@Test
 	public void testSearchTask() {
+		
 		String output = null;
 		// Test null case
 		TextBuddy.executeCommand("clear");
