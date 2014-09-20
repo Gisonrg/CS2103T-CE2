@@ -97,8 +97,7 @@ public class TextBuddy {
 	 * @param args the arguments input from the terminal
 	 */
 	public static void initializeTextBuddy(String[] args) {
-//		String inputFile = args[0];
-		String inputFile = "input.txt";
+		String inputFile = args[0];
 		fileName = inputFile;
 		initializeFileOperator(fileName);
 		loadTasks();
@@ -175,40 +174,6 @@ public class TextBuddy {
 		}
 	}
 	
-	
-	private static String searchTask(String userCommand) {
-		if (tasks.size() == EMPTY_LIST_SIZE) {
-			return MESSAGE_SEARCH_NOT_FOUND;
-		}
-		String keyword = removeFirstWord(userCommand);
-		return buildResultList(tasks, keyword);
-	}
-
-	/*
-	 * This method sort tasks alphabetically
-	 * 'alphabetically' means uppercase and lowercase don't affect sort results.
-	 * For example, 'apple' should be in front of 'Book', even though 'B' has a 
-	 * bigger ASCii value than 'a' 
-	 */
-	private static String sortTask() {
-		
-		class SortComparator implements Comparator<String> {
-			@Override
-			public int compare(String task1, String task2) {
-				String task1FirstChar = task1.substring(0, 1);
-				String task2FirstChar = task2.substring(0, 1);
-				
-				return task1FirstChar.compareToIgnoreCase(task2FirstChar);
-			}
-		}
-		
-		Collections.sort(tasks, new SortComparator());
-		
-		// save changes to the file
-		writeChanges();
-		return MESSAGE_SORT;
-	}
-
 	/**
 	 * This method adds a task to the file.
 	 * 
@@ -271,52 +236,47 @@ public class TextBuddy {
 	}
 
 	/**
-	 * This method prepares the task list for print on the screen
+	 * This method search tasks based on the specify keyword
 	 * 
-	 * @return a nice-formatted task list String
+	 * @param userCommand the user input
+	 * @return the search result
 	 */
-	private static String buildTaskList(LinkedList<String> tasks) {
-		StringBuilder taskList = new StringBuilder();
-		for (int i = 0; i < tasks.size(); i++) {
-			int indexForDisplay = i + INDEX_SHIFT_FIX;
-			taskList.append(indexForDisplay);
-			taskList.append(". ");
-			taskList.append(tasks.get(i));
-			if (i != (tasks.size() - INDEX_SHIFT_FIX)) {
-				// If reach the last task of the list, don't output the new line
-				taskList.append("\n");
-			}
-		}
-		return taskList.toString();
-	}
-	
-	/**
-	 * This method prepares the search result list for print on the screen 
-	 * 
-	 * @param keyword the keyword for searching
-	 * 
-	 * @return a nice-formatted result list String
-	 */
-	private static String buildResultList(LinkedList<String> tasks, String keyword) {
-		StringBuilder taskList = new StringBuilder();
-		boolean isFound = false;
-		for (int i = 0; i < tasks.size(); i++) {
-			String task = tasks.get(i);
-			if (task.toLowerCase().contains(keyword.toLowerCase())) { // Ignore Character Case
-				isFound = true; // keyword matches a task
-				int indexForDisplay = i + INDEX_SHIFT_FIX;
-				taskList.append(indexForDisplay);
-				taskList.append(". ");
-				taskList.append(task);
-				taskList.append("\n");
-			}
-		}
-
-		if (isFound) {
-			return taskList.toString();
-		} else {
+	private static String searchTask(String userCommand) {
+		if (tasks.size() == EMPTY_LIST_SIZE) {
 			return MESSAGE_SEARCH_NOT_FOUND;
 		}
+		// extract the keyword
+		String keyword = removeFirstWord(userCommand);
+		
+		return buildResultList(tasks, keyword);
+	}
+
+	/**
+	 * This method sort tasks alphabetically
+	 * 'alphabetically' means uppercase and lowercase don't affect sort results.
+	 * For example, 'apple' should be in front of 'Book', even though 'B' has a 
+	 * bigger ASCii value than 'a' 
+	 * 
+	 * @return a feedback string indicating the status of the operation
+	 */
+	private static String sortTask() {
+		
+		class SortComparator implements Comparator<String> {
+			@Override
+			public int compare(String task1, String task2) {
+				// get the first character of two strings
+				String task1FirstChar = task1.substring(0, 1);
+				String task2FirstChar = task2.substring(0, 1);
+				
+				return task1FirstChar.compareToIgnoreCase(task2FirstChar);
+			}
+		}
+		
+		Collections.sort(tasks, new SortComparator());
+		
+		// save changes to the file
+		writeChanges();
+		return MESSAGE_SORT;
 	}
 
 	/**
@@ -384,6 +344,56 @@ public class TextBuddy {
 		}
 	}
 	
+	/**
+	 * This method prepares the task list for print on the screen
+	 * 
+	 * @return a nice-formatted task list String
+	 */
+	private static String buildTaskList(LinkedList<String> tasks) {
+		StringBuilder taskList = new StringBuilder();
+		for (int i = 0; i < tasks.size(); i++) {
+			int indexForDisplay = i + INDEX_SHIFT_FIX;
+			taskList.append(indexForDisplay);
+			taskList.append(". ");
+			taskList.append(tasks.get(i));
+			if (i != (tasks.size() - INDEX_SHIFT_FIX)) {
+				// If reach the last task of the list, don't output the new line
+				taskList.append("\n");
+			}
+		}
+		return taskList.toString();
+	}
+
+	/**
+	 * This method prepares the search result list for print on the screen 
+	 * 
+	 * @param keyword the keyword for searching
+	 * 
+	 * @return a nice-formatted result list String
+	 */
+	private static String buildResultList(LinkedList<String> tasks, String keyword) {
+		StringBuilder taskList = new StringBuilder();
+		boolean isFound = false;
+		for (int i = 0; i < tasks.size(); i++) {
+			String task = tasks.get(i);
+			// if the keyword matches a task
+			if (task.toLowerCase().contains(keyword.toLowerCase())) { // Ignore Character Case
+				isFound = true; // set status found
+				int indexForDisplay = i + INDEX_SHIFT_FIX;
+				taskList.append(indexForDisplay);
+				taskList.append(". ");
+				taskList.append(task);
+				taskList.append("\n");
+			}
+		}
+	
+		if (isFound) {
+			return taskList.toString();
+		} else {
+			return MESSAGE_SEARCH_NOT_FOUND; // no result found
+		}
+	}
+
 	/**
 	 * This method checks how many lines are in the input file
 	 * (For testing purpose)
